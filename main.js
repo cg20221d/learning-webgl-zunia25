@@ -130,6 +130,8 @@ function main() {
     var vertical = 0.0;
     var horizontalPoints = 0.0;
     var verticalPoints = 0.0;
+    var sumbuZ = 0.0;
+    var sumbuZPoints = 0.0;
 
     // Variabel pointer ke GLSL
     var uModel = gl.getUniformLocation(shaderProgram, "uModel");
@@ -185,8 +187,10 @@ function main() {
         if (event.keyCode == 32) freeze = false;
         if (event.keyCode == 87) vertical = 0.0;
         if (event.keyCode == 83) vertical = 0.0;
-        if (event.keyCode == 68) horizontal = 0.0;
-        if (event.keyCode == 65) horizontal = 0.0;
+        if (event.keyCode == 76) horizontal = 0.0;
+        if (event.keyCode == 74) horizontal = 0.0;
+        if (event.keyCode == 73) sumbuZ = 0.0;
+        if (event.keyCode == 75) sumbuZ = 0.0;
     }
     document.addEventListener("keyup", onKeyUp, false);
 
@@ -194,8 +198,10 @@ function main() {
         if (event.keyCode == 32) freeze = true;
         if (event.keyCode == 87) vertical = -0.01;
         if (event.keyCode == 83) vertical = 0.01;
-        if (event.keyCode == 68) horizontal = 0.01;
-        if (event.keyCode == 65) horizontal = -0.01;
+        if (event.keyCode == 76) horizontal = 0.01;
+        if (event.keyCode == 74) horizontal = -0.01;
+        if (event.keyCode == 73) sumbuZ = 0.01;
+        if (event.keyCode == 75) sumbuZ = -0.01;
         if (event.keyCode == 37) camera[0] -= 0.1;
         else if (event.keyCode == 39) camera[0] += 0.1;
         if (event.keyCode == 38) camera[1] -= 0.1;
@@ -216,9 +222,10 @@ function main() {
         }
         horizontalPoints += horizontal;
         verticalPoints -= vertical;
+        sumbuZPoints -= sumbuZ;
         var model = glMatrix.mat4.create(); // Membuat matriks identitas
         glMatrix.mat4.translate(
-            model, model, [horizontalPoints, verticalPoints, 0.0]
+            model, model, [horizontalPoints, verticalPoints, sumbuZPoints]
         );
         glMatrix.mat4.rotateX(
             model, model, theta
